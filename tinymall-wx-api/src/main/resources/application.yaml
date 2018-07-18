@@ -1,0 +1,16 @@
+spring:
+  profiles:
+    active: wx,core.db
+
+# Spring boot 端口
+server:
+  url: http://localhost
+  port: 8082
+
+logging:
+  level:
+    com:
+      menethil:
+        tinymall:
+          wx:
+            Application: DEBUG

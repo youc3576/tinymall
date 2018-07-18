@@ -1,0 +1,50 @@
+spring:
+  messages:
+    encoding: utf-8
+
+# 地址配置,注意这里的端口必须与 application.yaml 里端口保持一致
+tinymall:
+  core:
+    store:
+      # 当前使用的对象存储服务,los 为本地存储，tos为腾讯云存储
+      activeStorage: los
+
+      # 腾讯对象存储配置信息
+      # 请参考 https://cloud.tencent.com/document/product/436/6249
+      tencent:
+        secretId: "XXXXXXXXXXXXXXXXXXXXXXXXX"
+        secretKey: "XXXXXXXXXXXXXXXXXX"
+        region: "XXXXXXXXXXXX"
+        bucketName: "XXXXXXXXXXXXXX"
+
+    notify:
+      # 邮件通知配置,邮箱一般用于接收业务通知例如收到新的订单，sendto 定义邮件接收者，通常为商城运营人员
+      MailNotifyConfig:
+        enable: true
+        host: smtp.exmail.qq.com
+        username: XXXXXX@XXXXXXXXXX.com.cn
+        password: XXXXXXXXXXX
+        sendto: XXXXXXXXXXX@qq.com
+
+      # 短消息模版通知配置
+      # 短信息用于通知客户，例如发货短信通知，注意配置格式；template-name，template-templateId 请参考 ConfigUtil 内枚举值
+      SMSNotifyConfig:
+        enable: true
+        appid: 111111111
+        appkey: XXXXXXXXXXXXXXXXXX
+        sign: XXXXXXXXX
+        template:
+          - name: paySucceed
+            templateId: 156349
+          - name: captcha
+            templateId: 156433
+
+      # 微信模版通知配置
+      # 微信模版用于通知客户或者运营者，注意配置格式；template-name，template-templateId 请参考 ConfigUtil 内枚举值
+      WXNotifyConfig:
+        enable: true
+        template:
+          - name: paySucceed
+            templateId: j33WuJ1cD8Mkc9iq1mX5-BAMmmrctB5N9zDmPFXnsAo
+          - name: captcha
+            templateId: xhekTaiu_aPdVvG0-exkr98OMXTR2MtymTj-iVAnijc

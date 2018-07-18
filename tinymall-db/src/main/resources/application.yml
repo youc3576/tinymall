@@ -1,0 +1,11 @@
+spring:
+  profiles:
+    active: db
+
+logging:
+  level:
+    com:
+      menethil:
+        tinymall:
+          db:
+            Application: DEBUG

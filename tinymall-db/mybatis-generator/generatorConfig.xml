@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+
+    <context id="mysqlgenerator" targetRuntime="MyBatis3">
+        <property name="autoDelimitKeywords" value="true"/>
+        <!--可以使用``包括字段名，避免字段名与sql保留字冲突报错-->
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+
+        <!-- 自动生成toString方法 -->
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin"/>
+        <!-- 自动生成equals方法和hashcode方法 -->
+        <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin"/>
+
+        <!-- 非官方插件 https://github.com/itfsw/mybatis-generator-plugin -->
+        <!-- 查询单条数据插件 -->
+        <plugin type="com.itfsw.mybatis.generator.plugins.SelectOneByExamplePlugin"/>
+        <!-- 查询结果选择性返回插件 -->
+        <plugin type="com.itfsw.mybatis.generator.plugins.SelectSelectivePlugin" />
+        <!-- Example Criteria 增强插件 -->
+        <plugin type="com.itfsw.mybatis.generator.plugins.ExampleEnhancedPlugin"/>
+        <!-- 数据Model属性对应Column获取插件 -->
+        <plugin type="com.itfsw.mybatis.generator.plugins.ModelColumnPlugin"/>
+        <!-- 逻辑删除插件 -->
+        <plugin type="com.itfsw.mybatis.generator.plugins.LogicalDeletePlugin">
+            <!-- 这里配置的是全局逻辑删除列和逻辑删除值，当然在table中配置的值会覆盖该全局配置 -->
+            <!-- 逻辑删除列类型只能为数字、字符串或者布尔类型 -->
+            <property name="logicalDeleteColumn" value="deleted"/>
+            <!-- 逻辑删除-已删除值 -->
+            <property name="logicalDeleteValue" value="1"/>
+            <!-- 逻辑删除-未删除值 -->
+            <property name="logicalUnDeleteValue" value="0"/>
+        </plugin>
+        <!-- 乐观锁插件 -->
+        <plugin type="com.itfsw.mybatis.generator.plugins.OptimisticLockerPlugin"/>
+
+        <commentGenerator>
+            <property name="suppressDate" value="true"/>
+            <!--<property name="suppressAllComments" value="true"/>-->
+        </commentGenerator>
+
+        <!--数据库连接信息-->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://127.0.0.1:3306/tinymall?useUnicode=true&amp;characterEncoding=UTF-8&amp;serverTimezone=UTC&amp;verifyServerCertificate=false&amp;useSSL=false&amp;allowPublicKeyRetrieval=true"
+                        userId="tinymall"
+                        password="tinymall123456" />
+
+
+        <javaModelGenerator targetPackage="com.menethil.tinymall.db.domain" targetProject="src/main/java" />
+        <sqlMapGenerator targetPackage="com.menethil.tinymall.db.dao" targetProject="src/main/resources" />
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.menethil.tinymall.db.dao" targetProject="src/main/java" />
+        <!--表名-->
+        <table tableName="tinymall_ad">
+            <generatedKey column="id" sqlStatement="MySql" identity="true" />
+            <columnOverride javaType="java.time.LocalDateTime" column="start_time"/>
+            <columnOverride javaType="java.time.LocalDateTime" column="end_time"/>
+            <columnOverride javaType="java.time.LocalDateTime" column="add_time"/>
+        </table>
+        <table tableName="tinymall_address">
+            <generatedKey column="id" sqlStatement="MySql" identity="true" />
+            <columnOverride javaType="java.time.LocalDateTime" column="add_time"/>
+        </table>
+        <table tableName="tinymall_admin">
+            <generatedKey column="id" sqlStatement="MySql" identity="true" />
+            <columnOverride javaType="java.time.LocalDateTime" column="last_login_time"/>
+            <columnOverride javaType="java.time.LocalDateTime" column="add_time"/>
+        </table>
+        <table tableName="tinymall_brand">
+            <generatedKey column="id" sqlStatement="MySql" identity="true" />
+            <columnOverride javaType="java.time.LocalDateTime" column="add_time"/>
+        </table>
+        <table tableName="tinymall_cart">
+            <generatedKey column="id" sqlStatement="MySql" identity="true" />
+            <columnOverride column="specifications" javaType="java.lang.String[]" typeHandler="com.menethil.tinymall.db.mybatis.JsonStringArrayTypeHandler"/>
+            <columnOverride javaType="java.time.LocalDateTime" column="add_time"/>
+        </table>
+        <table tableName="tinymall_category">
+            <generatedKey column="id" sqlStatement="MySql" identity="true" />
+            <columnOverride javaType="java.time.LocalDateTime" column="add_time"/>
+        </table>
+        <table tableName="tinymall_collect">
+            <generatedKey column="id" sqlStatement="MySql" identity="true" />
+            <columnOverride javaType="java.time.LocalDateTime" column="add_time"/>
+        </table>
+        <table tableName="tinymall_comment">
+            <generatedKey column="id" sqlStatement="MySql" identity="true" />
+            <columnOverride javaType="java.time.LocalDateTime" column="add_time"/>
+            <columnOverride column="pic_urls" javaType="java.lang.String[]" typeHandler="com.menethil.tinymall.db.mybatis.JsonStringArrayTypeHandler"/>
+        </table>
+        <table tableName="tinymall_footprint">
+            <generatedKey column="id" sqlStatement="MySql" identity="true" />
+            <columnOverride javaType="java.time.LocalDateTime" column="add_time"/>
+        </table>
+        <table tableName="tinymall_goods">
+            <generatedKey column="id" sqlStatement="MySql" identity="true" />
+            <columnOverride javaType="java.time.LocalDateTime" column="add_time"/>
+            <columnOverride column="gallery" javaType="java.lang.String[]" typeHandler="com.menethil.tinymall.db.mybatis.JsonStringArrayTypeHandler"/>
+        </table>
+        <table tableName="tinymall_goods_attribute">
+            <generatedKey column="id" sqlStatement="MySql" identity="true" />
+            <columnOverride javaType="java.time.LocalDateTime" column="add_time"/>
+        </table>
+        <table tableName="tinymall_goods_specification">
+            <generatedKey column="id" sqlStatement="MySql" identity="true" />
+            <columnOverride javaType="java.time.LocalDateTime" column="add_time"/>
+        </table>
+        <table tableName="tinymall_issue">
+            <generatedKey column="id" sqlStatement="MySql" identity="true" />
+            <columnOverride javaType="java.time.LocalDateTime" column="add_time"/>
+        </table>
+        <table tableName="tinymall_keyword">
+            <generatedKey column="id" sqlStatement="MySql" identity="true" />
+            <columnOverride javaType="java.time.LocalDateTime" column="add_time"/>
+        </table>
+        <table tableName="tinymall_order">
+            <generatedKey column="id" sqlStatement="MySql" identity="true" />
+            <columnOverride javaType="java.time.LocalDateTime" column="add_time"/>
+            <columnOverride javaType="java.time.LocalDateTime" column="pay_time"/>
+            <columnOverride javaType="java.time.LocalDateTime" column="ship_time"/>
+            <columnOverride javaType="java.time.LocalDateTime" column="confirm_time"/>
+            <columnOverride javaType="java.time.LocalDateTime" column="end_time"/>
+        </table>
+        <table tableName="tinymall_order_goods">
+            <generatedKey column="id" sqlStatement="MySql" identity="true" />
+            <columnOverride column="specifications" javaType="java.lang.String[]" typeHandler="com.menethil.tinymall.db.mybatis.JsonStringArrayTypeHandler"/>
+            <columnOverride javaType="java.time.LocalDateTime" column="add_time"/>
+        </table>
+        <table tableName="tinymall_product">
+            <generatedKey column="id" sqlStatement="MySql" identity="true" />
+            <columnOverride column="specifications" javaType="java.lang.String[]" typeHandler="com.menethil.tinymall.db.mybatis.JsonStringArrayTypeHandler"/>
+            <columnOverride javaType="java.time.LocalDateTime" column="add_time"/>
+        </table>
+        <table tableName="tinymall_region">
+            <generatedKey column="id" sqlStatement="MySql" identity="true" />
+        </table>
+        <table tableName="tinymall_search_history">
+            <generatedKey column="id" sqlStatement="MySql" identity="true" />
+            <columnOverride javaType="java.time.LocalDateTime" column="add_time"/>
+        </table>
+        <table tableName="tinymall_storage">
+            <generatedKey column="id" sqlStatement="MySql" identity="true" />
+            <columnOverride javaType="java.time.LocalDateTime" column="modified"/>
+            <columnOverride javaType="java.time.LocalDateTime" column="add_time"/>
+        </table>
+        <table tableName="tinymall_topic">
+            <generatedKey column="id" sqlStatement="MySql" identity="true" />
+            <columnOverride column="goods" javaType="java.lang.Integer[]" typeHandler="com.menethil.tinymall.db.mybatis.JsonIntegerArrayTypeHandler"/>
+            <columnOverride javaType="java.time.LocalDateTime" column="add_time"/>
+        </table>
+        <table tableName="tinymall_user">
+            <generatedKey column="id" sqlStatement="MySql" identity="true" />
+            <columnOverride javaType="java.time.LocalDate" column="birthday"/>
+            <columnOverride javaType="java.time.LocalDateTime" column="last_login_time"/>
+            <columnOverride javaType="java.time.LocalDateTime" column="add_time"/>
+        </table>
+    </context>
+</generatorConfiguration>

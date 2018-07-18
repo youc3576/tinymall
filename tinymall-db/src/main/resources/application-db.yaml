@@ -1,0 +1,31 @@
+spring:
+  # 数据库通用配置，有需要在不同环境下调整直接在下面对应环境覆写即可
+  datasource:
+    druid:
+      url: jdbc:mysql://localhost:3306/tinymall?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC&verifyServerCertificate=false&useSSL=false
+      username: tinymall
+      password: tinymall123456
+      driver-class-name: com.mysql.jdbc.Driver
+      initial-size: 10
+      max-active: 50
+      pool-prepared-statements: true
+      max-pool-prepared-statement-per-connection-size: 20
+      validation-query: SELECT 1 FROM DUAL
+      test-on-borrow: false
+      test-on-return: false
+      test-while-idle: true
+      time-between-eviction-runs-millis: 60000
+      filters: stat,wall,log4j
+
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
+
+logging:
+  level:
+    root: ERROR
+    org:
+      springframework: ERROR
+      mybatis: ERROR

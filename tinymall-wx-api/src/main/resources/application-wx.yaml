@@ -1,0 +1,7 @@
+# 微信小程序相关配置
+wx:
+  app-id: XXXXXXXXXXXXXXXXXX
+  app-secret: XXXXXXXXXXXXXXXXXXXXXXXXXXX
+  mch-id:
+  mch-key:
+  notify-url:
