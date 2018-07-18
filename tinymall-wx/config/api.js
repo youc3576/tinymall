@@ -10,7 +10,7 @@ var WxApiRoot = 'http://192.168.1.105:8082/wx/';
 
 // 以下是图片存储服务器API地址
 // 本机开发时使用
-var StorageApi = 'http://192.168.1.105/os/storage/create';
+var StorageApi = 'http://192.168.1.105:8082/wx/storage/create';
 // 局域网测试时使用
 // var StorageApi = 'http://192.168.1.114:8081/os/storage/create';
 // 云平台部署时使用
