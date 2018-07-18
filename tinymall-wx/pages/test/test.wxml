@@ -1,0 +1,15 @@
+<view class="form-box">
+  <form bindsubmit="formSubmit" report-submit="true">
+    <view class="form-item">
+      <input class="username" value="{{username}}" bindinput="bindUsernameInput" placeholder="账号" />
+      <image wx:if="{{ username.length > 0 }}" id="clear-username" class="clear" src="/static/images/clear_input.png" catchtap="clearInput"></image>
+    </view>
+
+    <view class="form-item">
+      <input class="password" value="{{password}}" password bindinput="bindPasswordInput" placeholder="密码" />
+      <image class="clear" id="clear-password" wx:if="{{ password.length > 0 }}" src="/static/images/clear_input.png" catchtap="clearInput"></image>
+    </view>
+
+    <button formType="submit" type="default" class="login-btn">测试消息</button>
+  </form>
+</view>

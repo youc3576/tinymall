@@ -1,0 +1,277 @@
+.HotName{
+  font-size:70rpx;
+  margin-left:20px;
+  color:#293539;
+  font-weight:300;
+  position: relative;
+}
+.HotName text{
+  width:7px;
+  height:7px;
+  position:absolute;
+  border:2px solid #a78845;
+  border-radius:50%;
+}
+.HotMark{
+  margin-left:25px;
+  color:#293539;
+  font-size:36rpx;
+  margin-top:5px;
+  font-weight:300;
+}
+.HotSwiper swiper{
+  width: 100%;
+  height: 450px;
+}
+.swiper-box{
+  width:260px;
+  margin:0 auto;
+  position:relative;
+  height:370px;
+  box-shadow:0px 5px 15px 0px #cfc9ca;
+  margin-top:20px;
+  border-radius:10px;
+}
+.swiper-box image{
+  width:100%;
+  height:260px;
+  background-color:#f5f5f5;
+  border-top-left-radius:5px;
+  border-top-right-radius:5px;
+}
+.swiper-box-info{
+  position:absolute;
+  width:100%;
+  height:110px;
+  top:260px;
+  background-color:#fff;
+  border-bottom-right-radius:5px;
+  border-bottom-left-radius:5px;
+}
+.swiper-box-info .name{
+  width:90%;
+  margin:0 auto;
+  margin-top:5px;
+  font-size:32rpx;
+  color:#293539;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.swiper-box-info .price{
+  float:left;
+  margin-top:40px;
+  margin-left:15px;
+  font-size:38rpx;
+  color:#a78845;
+}
+.swiper-box-info .box-coupons-btn{
+  float:right;
+  margin-top:35px;
+  background-color:#f5f5f5;
+  color:#6a7275;
+  font-size:28rpx;
+  font-weight:300;
+  width:90px;
+  height:30px;
+  line-height:30px;
+  text-align:center;
+  margin-right:15px;
+  border-radius:6rpx;
+}
+.swiper-box-info .box-info-money text{
+  font-size:30rpx;
+  padding-right:3px;
+}
+.box-info-icon-box{
+  float:right;
+  margin-right:10px;
+  margin-top:30px;
+}
+.box-info-icon-box .box-info-icon{
+  display:inline-block;
+  width:40px;
+  height:40px;
+  background-color:#f5f5f5;
+  margin-left:10px;
+  border-radius:50%;
+  text-align:center;
+}
+.box-info-icon-box .box-info-icon image{
+  width:25px;
+  height:25px;
+  background-color:rgba(0,0,0,0);
+  margin-top:8px;
+}
+
+
+.a-section .h {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: center;
+  height: 130rpx;
+}
+
+.a-section .h .txt {
+  padding-right: 30rpx;
+  background-size: 16.656rpx 27rpx;
+  display: inline-block;
+  height: 36rpx;
+  font-size: 33rpx;
+  line-height: 36rpx;
+}
+
+.a-brand .b {
+  width: 750rpx;
+  height: auto;
+  overflow: hidden;
+  position: relative;
+}
+
+.a-brand .wrap {
+  position: relative;
+}
+
+.a-brand .img {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.a-brand .mt {
+  position: absolute;
+  z-index: 2;
+  padding: 27rpx 31rpx;
+  left: 0;
+  top: 0;
+}
+
+.a-brand .mt .brand {
+  display: block;
+  font-size: 33rpx;
+  height: 43rpx;
+  color: #fff;
+}
+
+.a-brand .mt .price, .a-brand .mt .unit {
+  font-size: 25rpx;
+  color: #fff;
+}
+
+.a-brand .item-1 {
+  float: left;
+  width: 375rpx;
+  height: 252rpx;
+  overflow: hidden;
+  border-top: 1rpx solid #fff;
+  margin-left: 1rpx;
+}
+
+.a-brand .item-1:nth-child(2n+1){
+  margin-left: 0;
+  width: 374rpx;
+}
+
+.a-brand .item-1 .img {
+  width: 375rpx;
+  height: 253rpx;
+}
+
+
+
+.a-topic .b {
+  height: 533rpx;
+  width: 750rpx;
+  padding: 0 0 48rpx 0;
+}
+
+.a-topic .b .list {
+  height: 533rpx;
+  width: 750rpx;
+  white-space: nowrap;
+}
+
+.a-topic .b .item {
+  display: inline-block;
+  height: 533rpx;
+  width: 680.5rpx;
+  margin-left: 30rpx;
+  overflow: hidden;
+}
+
+.a-topic .b .item:last-child {
+  margin-right: 30rpx;
+}
+
+.a-topic .b .img {
+  height: 387.5rpx;
+  width: 680.5rpx;
+  margin-bottom: 30rpx;
+}
+
+.a-topic .b .np {
+  height: 35rpx;
+  margin-bottom: 13.5rpx;
+  color: #333;
+  font-size: 30rpx;
+}
+
+.a-topic .b .np .price {
+  margin-left: 20.8rpx;
+  color: #b4282d;
+}
+
+.a-topic .b .desc {
+  display: block;
+  height: 30rpx;
+  color: #999;
+  font-size: 24rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow:ellipsis;
+}
+
+
+.a-new .b {
+  width: 750rpx;
+  height: auto;
+  overflow: hidden;
+  padding: 0 31rpx 45rpx 31rpx;
+}
+
+.a-new .b .item {
+  float: left;
+  width: 302rpx;
+  margin-top: 10rpx;
+  margin-left: 21rpx;
+  margin-right: 21rpx;
+}
+
+.a-new .b .item-b {
+  margin-left: 42rpx;
+}
+
+.a-new .b .img {
+  width: 302rpx;
+  height: 302rpx;
+}
+
+.a-new .b .name {
+  text-align: center;
+  display: block;
+  width: 302rpx;
+  height: 35rpx;
+  margin-bottom: 14rpx;
+  overflow: hidden;
+  font-size: 30rpx;
+  color: #333;
+}
+
+.a-new .b .price {
+  display: block;
+  text-align: center;
+  line-height: 30rpx;
+  font-size: 30rpx;
+  color: #b4282d;
+}

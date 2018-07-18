@@ -1,0 +1,47 @@
+<import src="../../../wxParse/wxParse.wxml" />
+<view class="container">
+  <view class="my-info">
+    <view class="profile-info" bindtap="goLogin">
+      <image class="avatar" src="{{userInfo.avatarUrl}}" />
+      <view class="my-info-name">{{userInfo.nickName}}
+        <text></text>
+      </view>
+    </view>
+    <view class="my-info-order">
+      <view class="list-icon" bindtap="goOrder" data-index="0">
+        <view class="{{tabClass[0]}}"></view>
+        <image src="../../../images/my-icon-2.png" />
+        <text>我的订单</text>
+      </view>
+      <view class="list-icon" bindtap="goAddress" data-index="3">
+        <view class="{{tabClass[3]}}"></view>
+        <image src="../../../images/my-icon-1.png" />
+        <text>收货地址</text>
+      </view>
+    </view>
+  </view>
+  <view class="my-item-list">
+    <view class="my-item" bindtap="goAddress">
+      <text></text>
+      <navigator url="/pages/select-address/index" hover-class="none">快递费说明</navigator>
+      <image src="../../../images/right-icon.png" />
+    </view>
+    <view class="my-item" bindtap="goAddress">
+      <text></text>
+      <navigator url="/pages/test/test" hover-class="none">联系客服</navigator>
+      <image src="../../../images/right-icon.png" />
+    </view>
+  </view>
+  <view class="show-pop" hidden="{{aboutShow}}">
+    <view class="show-pop-box">
+      <image class="close" bindtap="close" src="../../../images/about-icon.png" />
+      <view class="show-pop-title">
+        <text class="l"></text>{{about.title}}
+        <text class="r"></text>
+      </view>
+      <view class="show-pop-text">
+        <template is="wxParse" data="{{wxParseData:article.nodes}}" />
+      </view>
+    </view>
+  </view>
+</view>

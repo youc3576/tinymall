@@ -1,0 +1,100 @@
+<view class="container">
+  <view class="HotName">今日推荐
+    <text></text>
+  </view>
+  <view class="HotMark">唯爱与美食不可辜负</view>
+  <view class="HotSwiper" style="margin-top:{{windowHeight/45}}px">
+    <swiper circular="true" autoplay="true" interval="6000" duration="500" previous-margin="{{windowWidth/3.8}}rpx" next-margin="{{windowWidth/3.8}}rpx">
+      <block wx:for-items="{{hotGoods}}" wx:key="{{id}}">
+        <navigator url="/pages/goods/goods?id={{item.id}}">
+          <swiper-item>
+            <view class="swiper-box">
+              <image src="{{item.picUrl}}" mode="widthFix" bindtap="getHotTap" data-id="{{item.id}}" />
+              <view class="swiper-box-info">
+                <view class="name">{{item.name}}</view>
+                <view class="price">
+                  ￥{{item.retailPrice}}
+                </view>
+                <view class="box-info-icon-box">
+                  <view class="box-info-icon">
+                    <image src="../../images/Hot-cart.png" bindtap="addShopCar" data-id="{{item.id}}" />
+                  </view>
+                </view>
+              </view>
+            </view>
+          </swiper-item>
+        </navigator>
+      </block>
+    </swiper>
+  </view>
+
+
+<!--
+  <view class="a-section a-new" wx:if="{{newGoods.length > 0}}">
+    <view class="h">
+      <view>
+        <navigator url="../newGoods/newGoods">
+          <text class="txt">周一周四 · 新品首发</text>
+        </navigator>
+      </view>
+    </view>
+    <view class="b">
+      <view class="item" wx:for="{{newGoods}}" wx:for-index="index" wx:for-item="item" wx:key="id">
+        <navigator url="../goods/goods?id={{item.id}}">
+          <image class="img" src="{{item.picUrl}}" background-size="cover"></image>
+          <text class="name">{{item.name}}</text>
+          <text class="price">￥{{item.retailPrice}}</text>
+        </navigator>
+      </view>
+    </view>
+  </view>
+  -->
+
+  <!--
+  <view class="a-section a-topic" wx:if="topics.length > 0">
+    <view class="h">
+      <view>
+      <navigator url="/pages/topic/topic">
+        <text class="txt">专题精选</text>
+        </navigator>
+      </view>
+    </view>
+    <view class="b">
+      <scroll-view scroll-x class="list">
+        <view class="item" wx:for="{{topics}}" wx:for-index="index" wx:for-item="item" wx:key="id">
+          <navigator url="../topicDetail/topicDetail?id={{item.id}}">
+            <image class="img" src="{{item.picUrl}}" background-size="cover"></image>
+            <view class="np">
+              <text class="name">{{item.title}}</text>
+              <text class="price">￥{{item.price}}元起</text>
+            </view>
+            <text class="desc">{{item.subtitle}}</text>
+          </navigator>
+        </view>
+      </scroll-view>
+    </view>
+  </view>
+
+  <view class="a-section a-brand">
+    <view class="h">
+      <navigator url="../brand/brand">
+        <text class="txt">品牌制造商直供</text>
+      </navigator>
+    </view>
+    <view class="b">
+      <view class="item item-1" wx:for="{{brands}}" wx:key="id">
+        <navigator url="/pages/brandDetail/brandDetail?id={{item.id}}">
+          <view class="wrap">
+            <image class="img" src="{{item.picUrl}}" mode="aspectFill"></image>
+            <view class="mt">
+              <text class="brand">{{item.name}}</text>
+              <text class="price">{{item.floorPrice}}</text>
+              <text class="unit">元起</text>
+            </view>
+          </view>
+        </navigator>
+      </view>
+    </view>
+  </view>
+  -->
+</view>
