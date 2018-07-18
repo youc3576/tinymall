@@ -1,3 +1,4 @@
 
+/src/main/resources/*.yaml
 /target/
 /tinymall-wx-api.iml
