@@ -2,6 +2,9 @@ package com.menethil.tinymall.wx.dao;
 
 import java.time.LocalDateTime;
 
+/**
+ * 用户访问 Token 信息
+ */
 public class UserToken {
     private Integer userId;
     private String token;

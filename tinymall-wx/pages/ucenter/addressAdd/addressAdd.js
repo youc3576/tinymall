@@ -153,7 +153,7 @@ Page({
     this.setRegionDoneStatus();
 
   },
-  
+
   onLoad: function(options) {
     // 页面初始化 options为页面跳转所带来的参数
     console.log(options)
@@ -162,32 +162,38 @@ Page({
         addressId: options.id
       });
       this.getAddressDetail();
+    } else {
+      //若是新增地址，则优先从微信获取
+      let address = this.data.address;
+      let that = this;
+
+      wx.authorize({
+        scope: "scope.address"
+      });
+      wx.chooseAddress({
+        success: function(res) {
+
+          address.provinceId = 99999;
+          address.cityId = 88888;
+          address.areaId = 77777;
+          address.name = res.userName;
+          address.mobile = res.telNumber;
+          address.provinceName = res.provinceName
+          address.cityName = res.cityName
+          address.areaName = res.countyName;
+          address.address = res.provinceName + res.cityName + res.countyName + res.detailInfo;
+
+          that.setData({
+            address: address,
+          });
+        }
+      });
     }
   },
-  
+
 
   onReady: function() {
-    // let address = this.data.address;
-    // let that = this;
 
-    // wx.authorize({
-    //   scope: "scope.address"
-    // });
-    // wx.chooseAddress({
-    //   success: function(res) {
-
-    //     address.name = res.userName;
-    //     address.mobile = res.telNumber;
-    //     address.provinceName = res.provinceName
-    //     address.cityName = res.cityName
-    //     address.areaName = res.countyName;
-    //     address.address = res.detailInfo;
-
-    //     that.setData({
-    //       address: address,
-    //     });
-    //   }
-    // });
   },
 
   selectRegionType(event) {
@@ -363,6 +369,22 @@ Page({
       countyName: address.areaName
     }, 'POST').then(function(res) {
       if (res.errno === 0) {
+        //返回之前，先取出上一页对象，并设置addressId
+        var pages = getCurrentPages();
+        var prevPage = pages[pages.length - 2];
+        console.log(prevPage);
+        if (prevPage.route == "pages/shopping/checkout/checkout") {
+          prevPage.setData({
+            addressId: res.data
+          })
+
+          try {
+            wx.setStorageSync('addressId', res.data);
+          } catch (e) {
+
+          }
+          console.log("set address");
+        }
         wx.navigateBack();
       }
     });

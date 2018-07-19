@@ -7,19 +7,28 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 用户访问 Token信息 管理器，缓存了用户访问的 TOKEN信息
+ */
 public class UserTokenManager {
     private static Map<String, UserToken> tokenMap = new HashMap<>();
     private static Map<Integer, UserToken> idMap = new HashMap<>();
 
+    /**
+     * 从缓存的 TOKEN 中查询返回用户ID
+     *
+     * @param token
+     * @return
+     */
     public static Integer getUserId(String token) {
 
 
         UserToken userToken = tokenMap.get(token);
-        if(userToken == null){
+        if (userToken == null) {
             return null;
         }
 
-        if(userToken.getExpireTime().isBefore(LocalDateTime.now())){
+        if (userToken.getExpireTime().isBefore(LocalDateTime.now())) {
             tokenMap.remove(token);
             idMap.remove(userToken.getUserId());
             return null;
@@ -29,14 +38,14 @@ public class UserTokenManager {
     }
 
 
-    public static UserToken generateToken(Integer id){
+    /**
+     * 生成用户访问的 TOKEN
+     *
+     * @param id
+     * @return
+     */
+    public static UserToken generateToken(Integer id) {
         UserToken userToken = null;
-
-//        userToken = idMap.get(id);
-//        if(userToken != null) {
-//            tokenMap.remove(userToken.getToken());
-//            idMap.remove(id);
-//        }
 
         String token = CharUtil.getRandomString(32);
         while (tokenMap.containsKey(token)) {
