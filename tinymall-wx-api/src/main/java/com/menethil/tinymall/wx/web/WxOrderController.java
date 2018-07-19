@@ -605,6 +605,10 @@ public class WxOrderController {
         order.setOrderStatus(OrderUtil.STATUS_REFUND);
         orderService.update(order);
 
+        //TODO 发送邮件和短信通知，这里采用异步发送
+        // 有用户申请退款，邮件通知运营人员
+        tinymallNotifyService.notifyMailMessage("退款申请", order.toString());
+
         return ResponseUtil.ok();
     }
 
