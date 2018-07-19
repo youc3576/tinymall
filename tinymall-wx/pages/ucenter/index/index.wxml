@@ -1,4 +1,3 @@
-<import src="../../../wxParse/wxParse.wxml" />
 <view class="container">
   <view class="my-info">
     <view class="profile-info" bindtap="goLogin">
@@ -43,9 +42,6 @@
       <view class="show-pop-title">
         <text class="l"></text>{{about.title}}
         <text class="r"></text>
-      </view>
-      <view class="show-pop-text">
-        <template is="wxParse" data="{{wxParseData:article.nodes}}" />
       </view>
     </view>
   </view>

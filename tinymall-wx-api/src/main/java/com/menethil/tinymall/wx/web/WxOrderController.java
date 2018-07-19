@@ -293,7 +293,7 @@ public class WxOrderController {
         // 根据订单商品总价计算运费，满88则免运费，否则8元；
         BigDecimal freightPrice = new BigDecimal(0.00);
         if (checkedGoodsPrice.compareTo(new BigDecimal(88.00)) < 0) {
-            freightPrice = new BigDecimal(8.00);
+            freightPrice = new BigDecimal(0.00);
         }
 
         // 可以使用的其他钱，例如用户积分
@@ -554,7 +554,11 @@ public class WxOrderController {
             //TODO 发送邮件和短信通知，这里采用异步发送
             // 订单支付成功以后，会发送短信给用户，以及发送邮件给管理员
             tinymallNotifyService.notifyMailMessage("新订单通知", order.toString());
-            tinymallNotifyService.notifySMSTemplate(order.getMobile(), ConfigUtil.NotifyType.PAY_SUCCEED, new String[]{orderSn});
+            /**
+             * 这里微信的短信平台对参数长度有限制，所以将订单号只截取后6位
+             *
+             */
+            tinymallNotifyService.notifySMSTemplate(order.getMobile(), ConfigUtil.NotifyType.PAY_SUCCEED, new String[]{orderSn.substring(8, 14)});
 
             return WxPayNotifyResponse.success("处理成功!");
         } catch (Exception e) {
