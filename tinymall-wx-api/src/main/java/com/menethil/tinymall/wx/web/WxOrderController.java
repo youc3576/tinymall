@@ -215,6 +215,8 @@ public class WxOrderController {
         orderVo.put("actualPrice", order.getActualPrice());
         orderVo.put("orderStatusText", OrderUtil.orderStatusText(order));
         orderVo.put("handleOption", OrderUtil.build(order));
+        orderVo.put("expCode", order.getShipChannel());
+        orderVo.put("expNo", order.getShipSn());
 
         List<TinymallOrderGoods> orderGoodsList = orderGoodsService.queryByOid(order.getId());
         List<Map<String, Object>> orderGoodsVoList = new ArrayList<>(orderGoodsList.size());
