@@ -41,7 +41,7 @@ public class TinymallGoodsService {
     public int countByCategory(List<Integer> catList, int offset, int limit) {
         TinymallGoodsExample example = new TinymallGoodsExample();
         example.or().andCategoryIdIn(catList).andDeletedEqualTo(false);
-        return (int)goodsMapper.countByExample(example);
+        return (int) goodsMapper.countByExample(example);
     }
 
     public List<TinymallGoods> queryByCategory(Integer catId, int offset, int limit) {
@@ -54,27 +54,31 @@ public class TinymallGoodsService {
     public int countByCategory(Integer catId, Integer page, Integer size) {
         TinymallGoodsExample example = new TinymallGoodsExample();
         example.or().andCategoryIdEqualTo(catId).andDeletedEqualTo(false);
-        return (int)goodsMapper.countByExample(example);
+        return (int) goodsMapper.countByExample(example);
     }
 
     public List<TinymallGoods> querySelective(Integer catId, Integer brandId, String keyword, Boolean isHot, Boolean isNew, Integer offset, Integer limit, String sort, String order) {
         TinymallGoodsExample example = new TinymallGoodsExample();
         TinymallGoodsExample.Criteria criteria = example.createCriteria();
 
-        if(!StringUtils.isEmpty(catId) && catId != 0){
+        if (!StringUtils.isEmpty(catId) && catId != 0) {
             criteria.andCategoryIdEqualTo(catId);
         }
-        if(!StringUtils.isEmpty(brandId)){
+        if (!StringUtils.isEmpty(brandId)) {
             criteria.andBrandIdEqualTo(brandId);
         }
-        if(!StringUtils.isEmpty(isNew)){
+        if (!StringUtils.isEmpty(isNew)) {
             criteria.andIsNewEqualTo(isNew);
         }
-        if(!StringUtils.isEmpty(isHot)){
+        if (!StringUtils.isEmpty(isHot)) {
             criteria.andIsHotEqualTo(isHot);
         }
-        if(!StringUtils.isEmpty(keyword)){
+        if (!StringUtils.isEmpty(keyword)) {
             criteria.andKeywordsLike("%" + keyword + "%");
+
+            TinymallGoodsExample.Criteria criteria2 = example.createCriteria();
+            criteria2.andNameLike("%" + keyword + "%");
+            example.or(criteria2);
         }
         criteria.andDeletedEqualTo(false);
 
@@ -82,36 +86,36 @@ public class TinymallGoodsService {
             example.setOrderByClause(sort + " " + order);
         }
 
-        if(!StringUtils.isEmpty(limit) && !StringUtils.isEmpty(offset)) {
+        if (!StringUtils.isEmpty(limit) && !StringUtils.isEmpty(offset)) {
             PageHelper.startPage(offset, limit);
         }
 
         Column[] columns = new Column[]{Column.id, Column.name, Column.picUrl, Column.retailPrice};
-        return goodsMapper.selectByExampleSelective(example ,columns);
+        return goodsMapper.selectByExampleSelective(example, columns);
     }
 
     public int countSelective(Integer catId, Integer brandId, String keyword, Boolean isHot, Boolean isNew, Integer offset, Integer limit, String sort, String order) {
         TinymallGoodsExample example = new TinymallGoodsExample();
         TinymallGoodsExample.Criteria criteria = example.createCriteria();
 
-        if(catId != null){
+        if (catId != null) {
             criteria.andCategoryIdEqualTo(catId);
         }
-        if(brandId != null){
+        if (brandId != null) {
             criteria.andBrandIdEqualTo(brandId);
         }
-        if(isNew != null){
+        if (isNew != null) {
             criteria.andIsNewEqualTo(isNew);
         }
-        if(isHot != null){
+        if (isHot != null) {
             criteria.andIsHotEqualTo(isHot);
         }
-        if(keyword != null){
+        if (keyword != null) {
             criteria.andKeywordsLike("%" + keyword + "%");
         }
         criteria.andDeletedEqualTo(false);
 
-        return (int)goodsMapper.countByExample(example);
+        return (int) goodsMapper.countByExample(example);
     }
 
     public TinymallGoods findById(Integer id) {
@@ -130,17 +134,17 @@ public class TinymallGoodsService {
     public Integer queryOnSale() {
         TinymallGoodsExample example = new TinymallGoodsExample();
         example.or().andIsOnSaleEqualTo(true).andDeletedEqualTo(false);
-        return (int)goodsMapper.countByExample(example);
+        return (int) goodsMapper.countByExample(example);
     }
 
     public List<TinymallGoods> querySelective(String goodsSn, String name, Integer page, Integer size, String sort, String order) {
         TinymallGoodsExample example = new TinymallGoodsExample();
         TinymallGoodsExample.Criteria criteria = example.createCriteria();
 
-        if(!StringUtils.isEmpty(goodsSn)){
+        if (!StringUtils.isEmpty(goodsSn)) {
             criteria.andGoodsSnEqualTo(goodsSn);
         }
-        if(!StringUtils.isEmpty(name)){
+        if (!StringUtils.isEmpty(name)) {
             criteria.andNameLike("%" + name + "%");
         }
         criteria.andDeletedEqualTo(false);
@@ -153,15 +157,15 @@ public class TinymallGoodsService {
         TinymallGoodsExample example = new TinymallGoodsExample();
         TinymallGoodsExample.Criteria criteria = example.createCriteria();
 
-        if(!StringUtils.isEmpty(goodsSn)){
+        if (!StringUtils.isEmpty(goodsSn)) {
             criteria.andGoodsSnEqualTo(goodsSn);
         }
-        if(!StringUtils.isEmpty(name)){
+        if (!StringUtils.isEmpty(name)) {
             criteria.andNameLike("%" + name + "%");
         }
         criteria.andDeletedEqualTo(false);
 
-        return (int)goodsMapper.countByExample(example);
+        return (int) goodsMapper.countByExample(example);
     }
 
     public void updateById(TinymallGoods goods) {
@@ -179,30 +183,30 @@ public class TinymallGoodsService {
     public int count() {
         TinymallGoodsExample example = new TinymallGoodsExample();
         example.or().andDeletedEqualTo(false);
-        return (int)goodsMapper.countByExample(example);
+        return (int) goodsMapper.countByExample(example);
     }
 
     public List<Integer> getCatIds(Integer brandId, String keyword, Boolean isHot, Boolean isNew) {
         TinymallGoodsExample example = new TinymallGoodsExample();
         TinymallGoodsExample.Criteria criteria = example.createCriteria();
 
-        if(brandId != null){
+        if (brandId != null) {
             criteria.andBrandIdEqualTo(brandId);
         }
-        if(isNew != null){
+        if (isNew != null) {
             criteria.andIsNewEqualTo(isNew);
         }
-        if(isHot != null){
+        if (isHot != null) {
             criteria.andIsHotEqualTo(isHot);
         }
-        if(keyword != null){
+        if (keyword != null) {
             criteria.andKeywordsLike("%" + keyword + "%");
         }
         criteria.andDeletedEqualTo(false);
 
         List<TinymallGoods> goodsList = goodsMapper.selectByExampleSelective(example, Column.categoryId);
         List<Integer> cats = new ArrayList<Integer>();
-        for(TinymallGoods goods : goodsList){
+        for (TinymallGoods goods : goodsList) {
             cats.add(goods.getCategoryId());
         }
         return cats;

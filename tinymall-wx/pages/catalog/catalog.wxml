@@ -1,4 +1,10 @@
 <view class="container">
+  <view class="search">
+    <navigator url="/pages/search/search" class="input">
+      <image class="icon"></image>
+      <text class="txt">搜索</text>
+    </navigator>
+  </view>
   <view class="HotName">分类
     <text></text>
   </view>
