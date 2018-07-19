@@ -17,7 +17,7 @@
                 </view>
                 <view class="box-info-icon-box">
                   <view class="box-info-icon">
-                    <image src="../../images/Hot-cart.png" bindtap="addShopCar" data-id="{{item.id}}" />
+                    <image src="../../images/Hot-love.png" bindtap="addShopCar" data-id="{{item.id}}" />
                   </view>
                 </view>
               </view>
@@ -29,12 +29,12 @@
   </view>
 
 
-<!--
+
   <view class="a-section a-new" wx:if="{{newGoods.length > 0}}">
     <view class="h">
       <view>
         <navigator url="../newGoods/newGoods">
-          <text class="txt">周一周四 · 新品首发</text>
+          <text class="txt">新品首发</text>
         </navigator>
       </view>
     </view>
@@ -48,9 +48,9 @@
       </view>
     </view>
   </view>
-  -->
 
-  <!--
+
+  
   <view class="a-section a-topic" wx:if="topics.length > 0">
     <view class="h">
       <view>
@@ -75,7 +75,7 @@
     </view>
   </view>
 
-  <view class="a-section a-brand">
+  <!-- <view class="a-section a-brand">
     <view class="h">
       <navigator url="../brand/brand">
         <text class="txt">品牌制造商直供</text>
@@ -95,6 +95,6 @@
         </navigator>
       </view>
     </view>
-  </view>
-  -->
+  </view> -->
+ 
 </view>

@@ -9,15 +9,15 @@ Page({
     newGoods: [],
     hotGoods: [],
      topics: [],
-     brands: [],
+    //  brands: [],
     // floorGoods: [],
     // banner: [],
-    channel: []
+    // channel: []
   },
   onShareAppMessage: function () {
     return {
       title: 'Renardの甜品屋',
-      desc: '仿网易严选微信小程序商城',
+      desc: '唯爱与美食不可辜负',
       path: '/pages/index/index'
     }
   },
@@ -30,10 +30,10 @@ Page({
           newGoods: res.data.newGoodsList,
           hotGoods: res.data.hotGoodsList,
            topics: res.data.topicList,
-           brands: res.data.brandList,
+          //  brands: res.data.brandList,
           // floorGoods: res.data.floorGoodsList,
           // banner: res.data.banner,
-          channel: res.data.channel
+          // channel: res.data.channel
         });
       }
     });

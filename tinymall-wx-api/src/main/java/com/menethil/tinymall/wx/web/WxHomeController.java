@@ -57,48 +57,48 @@ public class WxHomeController {
     public Object index() {
         Map<String, Object> data = new HashMap<>();
 
-        List<TinymallAd> banner = adService.queryIndex();
-        data.put("banner", banner);
+//        List<TinymallAd> banner = adService.queryIndex();
+//        data.put("banner", banner);
 
-        List<TinymallCategory> channel = categoryService.queryChannel();
-        data.put("channel", channel);
+//        List<TinymallCategory> channel = categoryService.queryChannel();
+//        data.put("channel", channel);
 
         List<TinymallGoods> newGoods = goodsService.queryByNew(0, 4);
         data.put("newGoodsList", newGoods);
 
-        List<TinymallGoods> hotGoods = goodsService.queryByHot(0, 3);
+        List<TinymallGoods> hotGoods = goodsService.queryByHot(0, 5);
         data.put("hotGoodsList", hotGoods);
 
-        List<TinymallBrand> brandList = brandService.query(0,4);
-        data.put("brandList", brandList);
+//        List<TinymallBrand> brandList = brandService.query(0,4);
+//        data.put("brandList", brandList);
 
-        List<TinymallTopic> topicList = topicService.queryList(0, 3);
+        List<TinymallTopic> topicList = topicService.queryList(0, 4);
         data.put("topicList", topicList);
 
-        List<Map> categoryList = new ArrayList<>();
-        List<TinymallCategory> catL1List = categoryService.queryL1WithoutRecommend(0, 6);
-        for (TinymallCategory catL1 : catL1List) {
-            List<TinymallCategory> catL2List = categoryService.queryByPid(catL1.getId());
-            List<Integer> l2List = new ArrayList<>();
-            for (TinymallCategory catL2 : catL2List) {
-                l2List.add(catL2.getId());
-            }
-
-            List<TinymallGoods> categoryGoods = null;
-            if(l2List.size() == 0){
-                categoryGoods = new ArrayList<>();
-            }
-            else{
-                categoryGoods = goodsService.queryByCategory(l2List, 0, 5);
-            }
-
-            Map catGoods = new HashMap();
-            catGoods.put("id", catL1.getId());
-            catGoods.put("name", catL1.getName());
-            catGoods.put("goodsList", categoryGoods);
-            categoryList.add(catGoods);
-        }
-        data.put("floorGoodsList", categoryList);
+//        List<Map> categoryList = new ArrayList<>();
+//        List<TinymallCategory> catL1List = categoryService.queryL1WithoutRecommend(0, 6);
+//        for (TinymallCategory catL1 : catL1List) {
+//            List<TinymallCategory> catL2List = categoryService.queryByPid(catL1.getId());
+//            List<Integer> l2List = new ArrayList<>();
+//            for (TinymallCategory catL2 : catL2List) {
+//                l2List.add(catL2.getId());
+//            }
+//
+//            List<TinymallGoods> categoryGoods = null;
+//            if(l2List.size() == 0){
+//                categoryGoods = new ArrayList<>();
+//            }
+//            else{
+//                categoryGoods = goodsService.queryByCategory(l2List, 0, 5);
+//            }
+//
+//            Map catGoods = new HashMap();
+//            catGoods.put("id", catL1.getId());
+//            catGoods.put("name", catL1.getName());
+//            catGoods.put("goodsList", categoryGoods);
+//            categoryList.add(catGoods);
+//        }
+//        data.put("floorGoodsList", categoryList);
 
         return ResponseUtil.ok(data);
     }
