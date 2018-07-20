@@ -1,12 +1,9 @@
 package com.menethil.tinymall.wx.config;
 
-import com.menethil.tinymall.core.util.YmlPropertyFactory;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 
 @Configuration
-@PropertySource(value = {"classpath:application-wx.yaml"}, factory = YmlPropertyFactory.class)
 @ConfigurationProperties(prefix = "wx")
 public class WxProperties {
 
