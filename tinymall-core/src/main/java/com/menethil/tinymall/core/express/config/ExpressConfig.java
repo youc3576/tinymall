@@ -1,9 +1,7 @@
 package com.menethil.tinymall.core.express.config;
 
-import com.menethil.tinymall.core.util.YmlPropertyFactory;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -12,7 +10,6 @@ import java.util.Map;
 
 @Component
 @Configuration
-@PropertySource(value = {"classpath:application-core.yaml"}, factory = YmlPropertyFactory.class)
 @ConfigurationProperties(prefix = "tinymall.core.express")
 public class ExpressConfig {
     private String appId;
