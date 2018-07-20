@@ -1,13 +1,13 @@
 package com.menethil.tinymall.admin.web;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import com.menethil.tinymall.admin.annotation.LoginAdmin;
 import com.menethil.tinymall.core.util.RegexUtil;
 import com.menethil.tinymall.core.util.ResponseUtil;
 import com.menethil.tinymall.db.domain.TinymallAddress;
 import com.menethil.tinymall.db.service.TinymallAddressService;
 import com.menethil.tinymall.db.service.TinymallRegionService;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

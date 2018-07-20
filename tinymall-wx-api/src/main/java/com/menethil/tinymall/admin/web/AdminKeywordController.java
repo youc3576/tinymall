@@ -1,29 +1,30 @@
 package com.menethil.tinymall.admin.web;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import com.menethil.tinymall.admin.annotation.LoginAdmin;
 import com.menethil.tinymall.core.util.ResponseUtil;
-import com.menethil.tinymall.db.domain.TinymallCollect;
-import com.menethil.tinymall.db.service.TinymallCollectService;
+import com.menethil.tinymall.db.domain.TinymallKeyword;
+import com.menethil.tinymall.db.service.TinymallKeywordService;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/admin/collect")
-public class AdminCollectController {
-    private final Log logger = LogFactory.getLog(AdminCollectController.class);
+@RequestMapping("/admin/keyword")
+public class AdminKeywordController {
+    private final Log logger = LogFactory.getLog(AdminKeywordController.class);
 
     @Autowired
-    private TinymallCollectService collectService;
+    private TinymallKeywordService keywordService;
 
     @GetMapping("/list")
     public Object list(@LoginAdmin Integer adminId,
-                       String userId, String valueId,
+                       String keyword, String url,
                        @RequestParam(value = "page", defaultValue = "1") Integer page,
                        @RequestParam(value = "limit", defaultValue = "10") Integer limit,
                        String sort, String order){
@@ -31,21 +32,23 @@ public class AdminCollectController {
             return ResponseUtil.unlogin();
         }
 
-        List<TinymallCollect> collectList = collectService.querySelective(userId, valueId, page, limit, sort, order);
-        int total = collectService.countSelective(userId, valueId, page, limit, sort, order);
+        List<TinymallKeyword> brandList = keywordService.querySelective(keyword, url, page, limit, sort, order);
+        int total = keywordService.countSelective(keyword, url, page, limit, sort, order);
         Map<String, Object> data = new HashMap<>();
         data.put("total", total);
-        data.put("items", collectList);
+        data.put("items", brandList);
 
         return ResponseUtil.ok(data);
     }
 
     @PostMapping("/create")
-    public Object create(@LoginAdmin Integer adminId, @RequestBody TinymallCollect collect){
+    public Object create(@LoginAdmin Integer adminId, @RequestBody TinymallKeyword keywords){
         if(adminId == null){
             return ResponseUtil.unlogin();
         }
-        return ResponseUtil.unsupport();
+        keywords.setAddTime(LocalDateTime.now());
+        keywordService.add(keywords);
+        return ResponseUtil.ok(keywords);
     }
 
     @GetMapping("/read")
@@ -58,25 +61,25 @@ public class AdminCollectController {
             return ResponseUtil.badArgument();
         }
 
-        TinymallCollect collect = collectService.findById(id);
-        return ResponseUtil.ok(collect);
+        TinymallKeyword brand = keywordService.findById(id);
+        return ResponseUtil.ok(brand);
     }
 
     @PostMapping("/update")
-    public Object update(@LoginAdmin Integer adminId, @RequestBody TinymallCollect collect){
+    public Object update(@LoginAdmin Integer adminId, @RequestBody TinymallKeyword keywords){
         if(adminId == null){
             return ResponseUtil.unlogin();
         }
-        collectService.updateById(collect);
-        return ResponseUtil.ok();
+        keywordService.updateById(keywords);
+        return ResponseUtil.ok(keywords);
     }
 
     @PostMapping("/delete")
-    public Object delete(@LoginAdmin Integer adminId, @RequestBody TinymallCollect collect){
+    public Object delete(@LoginAdmin Integer adminId, @RequestBody TinymallKeyword brand){
         if(adminId == null){
             return ResponseUtil.unlogin();
         }
-        collectService.deleteById(collect.getId());
+        keywordService.deleteById(brand.getId());
         return ResponseUtil.ok();
     }
 

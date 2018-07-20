@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-@SpringBootApplication(scanBasePackages = {"com.menethil.tinymall.core", "com.menethil.tinymall.wx", "com.menethil.tinymall.db"})
+@SpringBootApplication(scanBasePackages = {"com.menethil.tinymall.admin","com.menethil.tinymall.core", "com.menethil.tinymall.wx", "com.menethil.tinymall.db"})
 @MapperScan("com.menethil.tinymall.db.dao")
 @EnableTransactionManagement
 @EnableScheduling

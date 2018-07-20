@@ -1,30 +1,29 @@
 package com.menethil.tinymall.admin.web;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import com.menethil.tinymall.admin.annotation.LoginAdmin;
 import com.menethil.tinymall.core.util.ResponseUtil;
-import com.menethil.tinymall.db.domain.TinymallIssue;
-import com.menethil.tinymall.db.service.TinymallIssueService;
+import com.menethil.tinymall.db.domain.TinymallSearchHistory;
+import com.menethil.tinymall.db.service.TinymallSearchHistoryService;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/admin/issue")
-public class AdminIssueController {
-    private final Log logger = LogFactory.getLog(AdminIssueController.class);
+@RequestMapping("/admin/history")
+public class AdminHistoryController {
+    private final Log logger = LogFactory.getLog(AdminHistoryController.class);
 
     @Autowired
-    private TinymallIssueService issueService;
+    private TinymallSearchHistoryService searchHistoryService;
 
     @GetMapping("/list")
     public Object list(@LoginAdmin Integer adminId,
-                       String question,
+                       String userId, String keyword,
                        @RequestParam(value = "page", defaultValue = "1") Integer page,
                        @RequestParam(value = "limit", defaultValue = "10") Integer limit,
                        String sort, String order){
@@ -32,23 +31,21 @@ public class AdminIssueController {
             return ResponseUtil.unlogin();
         }
 
-        List<TinymallIssue> issueList = issueService.querySelective(question, page, limit, sort, order);
-        int total = issueService.countSelective(question, page, limit, sort, order);
+        List<TinymallSearchHistory> footprintList = searchHistoryService.querySelective(userId, keyword, page, limit, sort, order);
+        int total = searchHistoryService.countSelective(userId, keyword, page, limit, sort, order);
         Map<String, Object> data = new HashMap<>();
         data.put("total", total);
-        data.put("items", issueList);
+        data.put("items", footprintList);
 
         return ResponseUtil.ok(data);
     }
 
     @PostMapping("/create")
-    public Object create(@LoginAdmin Integer adminId, @RequestBody TinymallIssue issue){
+    public Object create(@LoginAdmin Integer adminId, @RequestBody TinymallSearchHistory history){
         if(adminId == null){
             return ResponseUtil.unlogin();
         }
-        issue.setAddTime(LocalDateTime.now());
-        issueService.add(issue);
-        return ResponseUtil.ok(issue);
+        return ResponseUtil.unsupport();
     }
 
     @GetMapping("/read")
@@ -61,25 +58,25 @@ public class AdminIssueController {
             return ResponseUtil.badArgument();
         }
 
-        TinymallIssue issue = issueService.findById(id);
-        return ResponseUtil.ok(issue);
+        TinymallSearchHistory history = searchHistoryService.findById(id);
+        return ResponseUtil.ok(history);
     }
 
     @PostMapping("/update")
-    public Object update(@LoginAdmin Integer adminId, @RequestBody TinymallIssue issue){
+    public Object update(@LoginAdmin Integer adminId, @RequestBody TinymallSearchHistory history){
         if(adminId == null){
             return ResponseUtil.unlogin();
         }
-        issueService.updateById(issue);
-        return ResponseUtil.ok(issue);
+        searchHistoryService.updateById(history);
+        return ResponseUtil.ok();
     }
 
     @PostMapping("/delete")
-    public Object delete(@LoginAdmin Integer adminId, @RequestBody TinymallIssue issue){
+    public Object delete(@LoginAdmin Integer adminId, @RequestBody TinymallSearchHistory history){
         if(adminId == null){
             return ResponseUtil.unlogin();
         }
-        issueService.deleteById(issue.getId());
+        searchHistoryService.deleteById(history.getId());
         return ResponseUtil.ok();
     }
 

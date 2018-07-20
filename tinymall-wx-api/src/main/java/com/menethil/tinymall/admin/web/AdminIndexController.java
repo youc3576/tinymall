@@ -1,8 +1,8 @@
 package com.menethil.tinymall.admin.web;
 
+import com.menethil.tinymall.core.util.ResponseUtil;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import com.menethil.tinymall.core.util.ResponseUtil;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

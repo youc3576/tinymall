@@ -1,11 +1,11 @@
 package com.menethil.tinymall.admin.web;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import com.menethil.tinymall.admin.annotation.LoginAdmin;
 import com.menethil.tinymall.core.util.ResponseUtil;
-import com.menethil.tinymall.db.domain.TinymallBrand;
-import com.menethil.tinymall.db.service.TinymallBrandService;
+import com.menethil.tinymall.db.domain.TinymallTopic;
+import com.menethil.tinymall.db.service.TinymallTopicService;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,16 +15,16 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/admin/brand")
-public class AdminBrandController {
-    private final Log logger = LogFactory.getLog(AdminBrandController.class);
+@RequestMapping("/admin/topic")
+public class AdminTopicController {
+    private final Log logger = LogFactory.getLog(AdminTopicController.class);
 
     @Autowired
-    private TinymallBrandService brandService;
+    private TinymallTopicService topicService;
 
     @GetMapping("/list")
     public Object list(@LoginAdmin Integer adminId,
-                       String id, String name,
+                       String title, String subtitle,
                        @RequestParam(value = "page", defaultValue = "1") Integer page,
                        @RequestParam(value = "limit", defaultValue = "10") Integer limit,
                        String sort, String order){
@@ -32,23 +32,23 @@ public class AdminBrandController {
             return ResponseUtil.unlogin();
         }
 
-        List<TinymallBrand> brandList = brandService.querySelective(id, name, page, limit, sort, order);
-        int total = brandService.countSelective(id, name, page, limit, sort, order);
+        List<TinymallTopic> topicList = topicService.querySelective(title, subtitle, page, limit, sort, order);
+        int total = topicService.countSelective(title, subtitle, page, limit, sort, order);
         Map<String, Object> data = new HashMap<>();
         data.put("total", total);
-        data.put("items", brandList);
+        data.put("items", topicList);
 
         return ResponseUtil.ok(data);
     }
 
     @PostMapping("/create")
-    public Object create(@LoginAdmin Integer adminId, @RequestBody TinymallBrand brand){
+    public Object create(@LoginAdmin Integer adminId, @RequestBody TinymallTopic topic){
         if(adminId == null){
             return ResponseUtil.unlogin();
         }
-        brand.setAddTime(LocalDateTime.now());
-        brandService.add(brand);
-        return ResponseUtil.ok(brand);
+        topic.setAddTime(LocalDateTime.now());
+        topicService.add(topic);
+        return ResponseUtil.ok(topic);
     }
 
     @GetMapping("/read")
@@ -61,25 +61,25 @@ public class AdminBrandController {
             return ResponseUtil.badArgument();
         }
 
-        TinymallBrand brand = brandService.findById(id);
+        TinymallTopic brand = topicService.findById(id);
         return ResponseUtil.ok(brand);
     }
 
     @PostMapping("/update")
-    public Object update(@LoginAdmin Integer adminId, @RequestBody TinymallBrand brand){
+    public Object update(@LoginAdmin Integer adminId, @RequestBody TinymallTopic topic){
         if(adminId == null){
             return ResponseUtil.unlogin();
         }
-        brandService.updateById(brand);
-        return ResponseUtil.ok(brand);
+        topicService.updateById(topic);
+        return ResponseUtil.ok(topic);
     }
 
     @PostMapping("/delete")
-    public Object delete(@LoginAdmin Integer adminId, @RequestBody TinymallBrand brand){
+    public Object delete(@LoginAdmin Integer adminId, @RequestBody TinymallTopic topic){
         if(adminId == null){
             return ResponseUtil.unlogin();
         }
-        brandService.deleteById(brand.getId());
+        topicService.deleteById(topic.getId());
         return ResponseUtil.ok();
     }
 

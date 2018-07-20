@@ -1,11 +1,11 @@
 package com.menethil.tinymall.admin.web;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import com.menethil.tinymall.admin.annotation.LoginAdmin;
 import com.menethil.tinymall.core.util.ResponseUtil;
-import com.menethil.tinymall.db.domain.TinymallKeyword;
-import com.menethil.tinymall.db.service.TinymallKeywordService;
+import com.menethil.tinymall.db.domain.TinymallComment;
+import com.menethil.tinymall.db.service.TinymallCommentService;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,16 +15,16 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/admin/keyword")
-public class AdminKeywordController {
-    private final Log logger = LogFactory.getLog(AdminKeywordController.class);
+@RequestMapping("/admin/comment")
+public class AdminCommentController {
+    private final Log logger = LogFactory.getLog(AdminCommentController.class);
 
     @Autowired
-    private TinymallKeywordService keywordService;
+    private TinymallCommentService commentService;
 
     @GetMapping("/list")
     public Object list(@LoginAdmin Integer adminId,
-                       String keyword, String url,
+                       String userId, String valueId,
                        @RequestParam(value = "page", defaultValue = "1") Integer page,
                        @RequestParam(value = "limit", defaultValue = "10") Integer limit,
                        String sort, String order){
@@ -32,8 +32,8 @@ public class AdminKeywordController {
             return ResponseUtil.unlogin();
         }
 
-        List<TinymallKeyword> brandList = keywordService.querySelective(keyword, url, page, limit, sort, order);
-        int total = keywordService.countSelective(keyword, url, page, limit, sort, order);
+        List<TinymallComment> brandList = commentService.querySelective(userId, valueId, page, limit, sort, order);
+        int total = commentService.countSelective(userId, valueId, page, limit, sort, order);
         Map<String, Object> data = new HashMap<>();
         data.put("total", total);
         data.put("items", brandList);
@@ -42,13 +42,13 @@ public class AdminKeywordController {
     }
 
     @PostMapping("/create")
-    public Object create(@LoginAdmin Integer adminId, @RequestBody TinymallKeyword keywords){
+    public Object create(@LoginAdmin Integer adminId, @RequestBody TinymallComment comment){
         if(adminId == null){
             return ResponseUtil.unlogin();
         }
-        keywords.setAddTime(LocalDateTime.now());
-        keywordService.add(keywords);
-        return ResponseUtil.ok(keywords);
+        comment.setAddTime(LocalDateTime.now());
+        commentService.add(comment);
+        return ResponseUtil.ok(comment);
     }
 
     @GetMapping("/read")
@@ -61,25 +61,25 @@ public class AdminKeywordController {
             return ResponseUtil.badArgument();
         }
 
-        TinymallKeyword brand = keywordService.findById(id);
-        return ResponseUtil.ok(brand);
+        TinymallComment comment = commentService.findById(id);
+        return ResponseUtil.ok(comment);
     }
 
     @PostMapping("/update")
-    public Object update(@LoginAdmin Integer adminId, @RequestBody TinymallKeyword keywords){
+    public Object update(@LoginAdmin Integer adminId, @RequestBody TinymallComment comment){
         if(adminId == null){
             return ResponseUtil.unlogin();
         }
-        keywordService.updateById(keywords);
-        return ResponseUtil.ok(keywords);
+        commentService.updateById(comment);
+        return ResponseUtil.ok(comment);
     }
 
     @PostMapping("/delete")
-    public Object delete(@LoginAdmin Integer adminId, @RequestBody TinymallKeyword brand){
+    public Object delete(@LoginAdmin Integer adminId, @RequestBody TinymallComment comment){
         if(adminId == null){
             return ResponseUtil.unlogin();
         }
-        keywordService.deleteById(brand.getId());
+        commentService.deleteById(comment.getId());
         return ResponseUtil.ok();
     }
 

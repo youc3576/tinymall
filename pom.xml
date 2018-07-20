@@ -27,7 +27,6 @@
         <module>tinymall-wx-api</module>
         <module>tinymall-core</module>
         <module>tinymall-db</module>
-        <module>tinymall-admin-api</module>
     </modules>
 
     <dependencyManagement>
